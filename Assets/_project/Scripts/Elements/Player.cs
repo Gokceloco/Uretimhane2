@@ -115,6 +115,13 @@ public class Player : MonoBehaviour
             collision.gameObject.SetActive(false);
         }
     }
+
+    public void RestartPlayer()
+    {
+        _rb.position = Vector3.zero;
+        transform.rotation = Quaternion.identity;
+        isAppleCollected = false;
+    }
 }
 
 public enum PlayerState
