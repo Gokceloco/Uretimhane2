@@ -15,6 +15,9 @@ public class Player : MonoBehaviour
 
     private Rigidbody _rb;
 
+    private Vector3 _direction;
+    private Vector3 _initialMousePos;
+
     private void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -22,14 +25,36 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        MovePlayer();
+        //MovePlayerWithKeys();
+        MovePlayerWithMouse();
         if (doesCameraFollow)
         {
             MoveCamera();
         }
     }
 
-    void MovePlayer()
+    private void MovePlayerWithMouse()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            _initialMousePos = Input.mousePosition;
+        }
+        if (Input.GetMouseButton(0))
+        {
+            _direction = Input.mousePosition - _initialMousePos;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            _direction = Vector3.zero;
+        }
+
+        var adjustedDir = new Vector3(_direction.x, 0, _direction.y);
+
+        _rb.linearVelocity = adjustedDir.normalized * speed;
+        transform.LookAt(transform.position + adjustedDir);
+    }
+
+    void MovePlayerWithKeys()
     {
         var direction = Vector3.zero;
 

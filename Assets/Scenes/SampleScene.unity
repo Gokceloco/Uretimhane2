@@ -932,7 +932,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doesCameraFollow: 0
   mainCamera: {fileID: 327992475}
-  speed: 5
+  speed: 4
   jumpPower: 0
   rotationSpeed: 0
   isAppleCollected: 0
